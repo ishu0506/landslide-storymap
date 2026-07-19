@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Landslide StoryMap</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Leaflet (free, no API key needed) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVBAR
+=========================== -->
+
+<header>
+
+    <nav>
+
+        <div class="logo">
+            Landslide StoryMap
+        </div>
+
+        <ul>
+
+            <li><a href="#home">Home</a></li>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#study">Study Area</a></li>
+            <li><a href="#methodology">Methodology</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ===========================
+     HERO
+=========================== -->
+
+<section id="home" class="hero">
+
+    <div class="overlay">
+
+        <h1>Spatio-Temporal Landslide Susceptibility Mapping</h1>
+
+        <h2>Gilgit District, Pakistan</h2>
+
+        <p>
+            2017–2024 <br>
+            Using GIS • Remote Sensing • Machine Learning • SHAP
+        </p>
+
+        <a href="#intro">
+            <button>Explore Story</button>
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================
+     ACADEMIC CREDIT
+=========================== -->
+
+<section id="academic-credit" class="academic-credit">
+
+    <div class="academic-credit-inner">
+
+        <div class="academic-logos">
+            <img src="image/uog_logo.png" alt="University of Gujrat logo">
+            <img src="image/geography_logo.png" alt="Department of Geography logo">
+        </div>
+
+        <div class="academic-text">
+            <h3>University of Gujrat</h3>
+            <p>Department of Geography &mdash; Remote Sensing &amp; GIS</p>
+
+            <p>
+                <strong>Supervisor:</strong> Dr. Saira Munawar, Assistant Professor,
+                Department of Geography, University of Gujrat
+            </p>
+
+            <p>
+                <strong>Chairperson:</strong> Dr. Muhammad Miandad Abbasi,
+                Department of Geography, University of Gujrat
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================
+     INTRODUCTION
+=========================== -->
+
+<section id="intro" class="intro">
+
+    <div class="intro-solo">
+
+        <h2>Introduction</h2>
+
+        <p>
+            Landslides are among the most destructive natural hazards in mountainous
+            terrain, driven by the interaction of steep slopes, active tectonics,
+            heavy rainfall and expanding human activity. Gilgit District sits at the
+            junction of the Karakoram, Hindu Kush and Himalayan mountain systems,
+            where continuing plate collision and rugged relief make slope failure a
+            recurring threat to roads, settlements and livelihoods.
+        </p>
+
+        <p>
+            This StoryMap presents a Landslide Susceptibility Mapping (LSM) framework
+            built for Gilgit District covering 2017–2024. Twelve geo-environmental
+            conditioning factors were combined with a verified landslide inventory and
+            modelled using a Random Forest classifier, while SHAP (Explainable AI) was
+            used to interpret which factors drive susceptibility and why — turning a
+            "black box" prediction into a transparent, decision-ready hazard map.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================
+     STUDY AREA
+=========================== -->
+
+<section id="study" class="intro">
+
+    <div class="container">
+
+        <div class="intro-image">
+
+            <img src="image/studyarea.png" alt="Studyarea Map">
+        </div>
+
+        <div class="intro-text">
+
+            <h2>Study Area</h2>
+
+            <p>
+                Gilgit District lies between 35°40′–36°40′N and 73°40′–74°40′E in
+                Gilgit-Baltistan, northern Pakistan, spanning roughly 4,208 km².
+                Elevation ranges from about 1,213 m in the river valleys to 7,647 m
+                in the surrounding peaks, with slopes frequently exceeding 35°.
+            </p>
+
+            <p>
+                The district is drained by the Gilgit and Hunza Rivers and crossed by
+                the Karakoram Highway — a critical CPEC transportation corridor.
+                Active tectonic uplift, fractured rock formations, seasonal rainfall
+                and snowmelt combine to make this one of the most landslide-prone
+                regions of northern Pakistan.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="map-section">
+
+        <h3>Explore the Study Area Boundary</h3>
+
+        <p class="map-caption">
+            Click on the highlighted boundary below to view district details.
+        </p>
+
+        <div id="interactive-map"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================
+     METHODOLOGY
+=========================== -->
+
+<section id="methodology" class="intro">
+
+    <div class="container">
+
+        <div class="intro-text">
+
+            <h2>Methodology</h2>
+
+            <p>
+                A landslide inventory of 104 points — 52 landslide and 52
+                non-landslide locations (2017–2024) — was built using Google Earth
+                Pro imagery and disaster records, then split 70:30 for model
+                training and testing.
+            </p>
+
+            <p>
+                Twelve conditioning factors were extracted from DEM, Sentinel-2 and
+                GPM-IMERG data, checked for multicollinearity using VIF and
+                Tolerance, then used to train a Random Forest classifier. SHAP
+                (SHapley Additive exPlanations) was applied afterward to interpret
+                each factor's contribution before generating the final susceptibility
+                map.
+            </p>
+
+        </div>
+
+        <div class="intro-image">
+
+            <img src="image/flowchart.png" alt="Methodology Flowchart">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================
+     RESULTS — CONDITIONING FACTORS
+=========================== -->
+
+<section id="results" class="intro">
+
+    <h2 style="text-align:center;font-size:42px;margin-bottom:10px;">
+        Landslide Conditioning Factors
+    </h2>
+
+    <p class="section-subtitle">
+        Twelve topographic, hydrological, environmental and anthropogenic factors
+        were used to train the Random Forest model.
+    </p>
+
+    <div class="gallery">
+
+        <div class="factor-card">
+            <img src="image/Elevation.jpeg" alt="Elevation">
+            <h4>Elevation</h4>
+            <p>Derived from a 30 m DEM; shapes rainfall patterns, vegetation zones
+               and snowmelt behaviour across the district.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/Slope.jpeg" alt="Slope">
+            <h4>Slope</h4>
+            <p>The steepest angle of terrain change — the single most influential
+               factor, directly linked to gravitational shear stress.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/Aspects.jpeg" alt="Aspect">
+            <h4>Aspect</h4>
+            <p>Direction a slope faces; influences solar exposure, moisture
+               retention and freeze–thaw weathering cycles.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/Curvature.jpeg" alt="Curvature">
+            <h4>Curvature</h4>
+            <p>Describes concave vs. convex terrain; concave zones trap water and
+               loose soil, raising instability.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/Profile Curvature.jpeg" alt="Profile Curvature">
+            <h4>Profile Curvature</h4>
+            <p>Curvature along the slope direction; controls runoff velocity and
+               downslope erosion intensity.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/TWI.jpeg" alt="Topographic Wetness Index">
+            <h4>TWI</h4>
+            <p>Topographic Wetness Index estimates soil moisture accumulation;
+               higher values mean wetter, less stable ground.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/SPI.jpeg" alt="Stream Power Index">
+            <h4>SPI</h4>
+            <p>Stream Power Index measures the erosive power of surface runoff
+               across the terrain.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/LULC.jpeg" alt="Land Use Land Cover">
+            <h4>LULC</h4>
+            <p>Land Use/Land Cover from ESA WorldCover; barren and sparsely
+               vegetated land is far more landslide-prone than forest cover.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/NDVI.jpeg" alt="NDVI">
+            <h4>NDVI</h4>
+            <p>Vegetation density and root cohesion from Sentinel-2; denser
+               vegetation improves soil stability.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/Precipitation.jpeg" alt="Precipitation">
+            <h4>Precipitation</h4>
+            <p>GPM-IMERG rainfall data; increased rainfall raises pore-water
+               pressure, a key landslide trigger.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/Distance to River.jpeg" alt="Distance from Rivers">
+            <h4>Distance from Rivers</h4>
+            <p>Proximity to river channels; nearby slopes face continual toe
+               erosion and bank undercutting.</p>
+        </div>
+
+        <div class="factor-card">
+            <img src="image/Diisttance from road.jpeg" alt="Distance from Roads">
+            <h4>Distance from Roads</h4>
+            <p>Proximity to road networks; cutting, blasting and excavation
+               activities destabilise nearby slopes.</p>
+        </div>
+
+    </div>
+
+
+    <!-- ===========================
+         LANDSLIDE INVENTORY & MODEL VALIDATION
+    =========================== -->
+
+    <div class="final-map-showcase">
+
+        <h2>Landslide Inventory &amp; Model Validation</h2>
+
+        <p class="section-subtitle">
+            Before training, the data was checked for reliability and
+            statistical soundness.
+        </p>
+
+        <div class="gallery">
+
+            <div class="factor-card chart-card">
+                <img src="image/Points.jpeg" alt="Landslide Inventory Points">
+                <h4>Inventory Distribution</h4>
+                <p>Spatial distribution of the 52 landslide and 52 non-landslide
+                   points (2017–2024) used to train and test the model.</p>
+            </div>
+
+            <div class="factor-card chart-card">
+                <img src="image/TOL.jpeg" alt="VIF and Tolerance Table">
+                <h4>Multicollinearity Check</h4>
+                <p>VIF and Tolerance values for all 12 factors — every factor
+                   fell within acceptable limits (VIF &lt; 5, TOL &gt; 0.2),
+                   confirming no redundant variables.</p>
+            </div>
+
+            <div class="factor-card chart-card">
+                <img src="image/ROC.jpeg" alt="ROC-AUC Curve">
+                <h4>ROC-AUC Curve</h4>
+                <p>The Random Forest model achieved an AUC of 0.94 — excellent
+                   discrimination between landslide and non-landslide zones.</p>
+            </div>
+
+            <div class="factor-card chart-card">
+                <img src="image/Validation.jpeg" alt="Model Validation Metrics">
+                <h4>Performance Metrics</h4>
+                <p>Accuracy, precision, recall and F1-score results from the
+                   70:30 train-test split, confirming balanced, reliable
+                   classification.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===========================
+         FINAL SUSCEPTIBILITY MAP SHOWCASE
+    =========================== -->
+
+    <div class="final-map-showcase">
+
+        <h2>Final Landslide Susceptibility Map</h2>
+
+        <p class="section-subtitle">
+            All twelve factors were combined through the trained Random Forest
+            model to classify Gilgit District into five susceptibility zones.
+        </p>
+
+        <div class="final-map-grid">
+
+            <div class="final-map-image">
+                <img src="image/Final map.jpeg" alt="Final Landslide Susceptibility Map">
+            </div>
+
+            <div class="final-map-stats">
+
+                <div class="stat-card">
+                    <span class="stat-value">84.4%</span>
+                    <span class="stat-label">Overall Accuracy</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-value">87.0%</span>
+                    <span class="stat-label">Precision</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-value">81.0%</span>
+                    <span class="stat-label">Recall</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-value">84.0%</span>
+                    <span class="stat-label">F1-Score</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-value">0.94</span>
+                    <span class="stat-label">ROC-AUC</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <p class="map-caption" style="margin-top:25px;">
+            High and Very High susceptibility zones cluster along steep valley
+            slopes, river courses and the Karakoram Highway corridor — where SHAP
+            identified Slope, NDVI, Distance from Roads, Distance from Rivers, TWI
+            and Elevation as the strongest drivers.
+        </p>
+
+    </div>
+
+
+    <!-- ===========================
+         MODEL INTERPRETABILITY
+    =========================== -->
+
+    <div class="final-map-showcase">
+
+        <h2>Model Interpretability</h2>
+
+        <p class="section-subtitle">
+            SHAP (Explainable AI) was used to open up the Random Forest
+            "black box" and explain what drove each prediction.
+        </p>
+
+        <div class="gallery">
+
+            <div class="factor-card chart-card">
+                <img src="image/RF.jpeg" alt="Random Forest Feature Importance">
+                <h4>Feature Importance</h4>
+                <p>Random Forest ranks Slope as the single most important factor,
+                   followed by NDVI, Distance from Roads, Distance from Rivers,
+                   TWI and Elevation.</p>
+            </div>
+
+            <div class="factor-card chart-card">
+                <img src="image/SHAp.jpeg" alt="SHAP Summary Plot">
+                <h4>SHAP Summary Plot</h4>
+                <p>Shows how each factor pushes predictions higher or lower.
+                   Steep slopes and low vegetation (NDVI) strongly increase
+                   susceptibility, while distance from roads and rivers reduces it.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================
+     CONCLUSION
+=========================== -->
+
+<section id="conclusion" class="intro">
+
+    <div class="intro-solo">
+
+        <h2>Conclusion</h2>
+
+        <p>
+            The Random Forest and SHAP-based framework successfully identified
+            high-risk landslide zones across Gilgit District, achieving an overall
+            accuracy of 84.4% and a ROC-AUC of 0.94. Slope, vegetation cover, and
+            proximity to roads and rivers emerged as the strongest drivers of
+            susceptibility in the region.
+        </p>
+
+        <p>
+            The resulting susceptibility map (see the <a href="#results">Results
+            section above</a>) offers a practical tool for disaster risk
+            management, infrastructure planning and sustainable land-use decisions
+            in Gilgit District and similar mountainous regions of northern
+            Pakistan.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <p class="footer-name">Ishmal Imran</p>
+
+        <div class="footer-links">
+            <a href="mailto:ishmalimran0506@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/ishmal-imran-1b5076332" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/ishu0506" target="_blank" rel="noopener">GitHub</a>
+        </div>
+
+        <p class="footer-copyright">&copy; 2026 Ishmal Imran. All rights reserved.</p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- JavaScript -->
+
+<script src="js/script.js"></script>
+
+<!-- Leaflet (free, no API key needed) -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<!-- Interactive Map Logic -->
+<script src="js/map.js"></script>
+
+</body>
+
+</html>
